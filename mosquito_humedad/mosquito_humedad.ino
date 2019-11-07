@@ -163,30 +163,18 @@ void loop() {
     lastMsg = now;
     ++value;
 
-  float frecuencia=ObtenerFrecuencia(); //obtenemos la Frecuencia de los pulsos en Hz
-  float caudal_L_m=frecuencia/factor_conversion; //calculamos el caudal en L/m
-  float caudal_L_h=caudal_L_m*60; //calculamos el caudal en L/h
-
-  //-----Enviamos por el puerto serie---------------
-  Serial.print ("FrecuenciaPulsos: "); 
-  Serial.print (frecuencia,0); 
-  Serial.print ("Hz\tCaudal: "); 
-  Serial.print (caudal_L_m,3); 
-  Serial.print (" L/m\t"); 
-   Serial.print (caudal_L_h,3); 
-  Serial.println ("L/h"); 
       
       // read the value from the sensor:
-   //   sensorValue = analogRead(sensorPin);
-   //   Serial.print("Moisture = " );
-   //   Serial.println(sensorValue);
+      sensorValue = analogRead(sensorPin);
+      Serial.print("Moisture = " );
+      Serial.println(sensorValue);
     //  snprintf(aux,50, "hello world #%ld", value);
    //    char b[2];
-   //    String auxString=String(sensorValue);
-   //    char aux[10];
-   //    auxString.toCharArray(aux, 10);
+       String auxString=String(sensorValue);
+       char aux[10];
+       auxString.toCharArray(aux, 10);
 
-   //   client.publish("casa/despacho/flujo", aux); //msg
+      client.publish("casa/despacho/humedad", aux); //msg
   }
   delay(10000);
 
